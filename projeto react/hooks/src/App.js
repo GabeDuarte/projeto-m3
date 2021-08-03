@@ -3,21 +3,19 @@ import React, {useState, useEffect} from 'react';
 function App(){
   // tarefas  -> nome do state
   // setTarefas -> função para atualizar o valor do state
-  const [tarefas, setTarefas] = useState([
-    'Estudar',
-    'Trabalhar',
-    'Cozinhar',
-    'Dar banho no cachorro',
-    'Assistir bob esponja',
-    'Plantar tomates'
-  ]);
+  const [tarefas, setTarefas] = useState([]);
 
   const [nome, setNome] = useState('To Do List - 03/08/2021');
 
   const [input, setInput] = useState('');
 
   useEffect(()=> {localStorage.setItem('tarefas', JSON.stringify(tarefas))}, [tarefas]);
-  useEffect(()=> {const tarefasStorage })
+  useEffect(()=> {const tarefasStorage = localStorage.getItem('tarefas'); 
+
+  if (tarefasStorage){
+    setTarefas(JSON.parse(tarefasStorage));
+  }
+}, []);
 
   function handleAdd(){
     setTarefas([...tarefas, input]);
