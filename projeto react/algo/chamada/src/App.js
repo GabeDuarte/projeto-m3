@@ -24,21 +24,24 @@ function App(){
   const handleAdd = useCallback(()=>{
     setChamada([...chamada, input])
     setInput('')
-  });
+  })
 
   return (
     <body>
-    <div className='main'>
-      <ul>
+    <div>
       <h1>{titulo}</h1>
       <h3>A turma tem {totalAlunos} alunos.</h3>
-        {chamada.map((aluno)=> (
-          <li key={aluno}>{aluno}</li>
-        ))}
-      </ul>
-      <div className='input'>
-        <input placeholder='nome do aluno' type='text' value={input} onChange={(a)=> setInput(a.target.value)}/>
-        <button type='button' onClick={handleAdd}>Cadastrar aluno</button>
+      <div className='lista'>
+        <ul>
+          <h1>Alunos:</h1>
+          {chamada.map((aluno)=> (
+            <li key={aluno}>{aluno}</li>
+          ))}
+        </ul>
+        <div className='input'>
+          <input placeholder='nome do aluno' type='text' value={input} onChange={(a)=> setInput(a.target.value)}/>
+          <button type='button' onClick={handleAdd}>Cadastrar aluno</button>
+        </div>
       </div>
     </div>
     </body>

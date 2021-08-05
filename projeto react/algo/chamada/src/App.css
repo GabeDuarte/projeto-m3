@@ -1,14 +1,21 @@
-.main{
+body{
   display: flex;
+  flex: content;
   justify-content: center;
-  flex-direction: column;
-  margin: 0 400px;
-  padding: 10px;
+  background-color: chocolate;
 }
 
-.input{
-display: flex;
-flex-direction: column;
-justify-content: center;
-width: 200px;
+.lista{
+  background-color: seashell;
+  padding: 2%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  color: navy;
+  /* display: flex;
+  justify-content: center; */
+}
+
+.lista ul{
+  list-style: none;
+  font-weight: bolder;
 }
