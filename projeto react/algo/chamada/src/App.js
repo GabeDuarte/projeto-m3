@@ -1,10 +1,17 @@
-import React, {useState, useEffect} from 'react'
-import './App.css'
+// useMemo é um 'metodo/função' que usamos para melhorar o desempenho de nossa aplicação por retornar um 'valor' que já foi calculado na primeira inicialização, como uma 'memoria cache'.
 
+
+
+
+
+import React, {useState, useEffect, useMemo, useCallback} from 'react'
+import './App.css'
 
 function App(){
   const [chamada, setChamada] = useState(['Gabriel', 'Marcos', 'Luana', 'Vanessa', 'David']);
   const [input, setInput] = useState('');
+  const [titulo, setTitulo] = useState('Chamada - Blue turma 02')
+  const totalAlunos = useMemo(()=> chamada.length, [chamada]);
 
   useEffect(()=> {localStorage.setItem('alunos', JSON.stringify(chamada))}, [chamada]);
   useEffect(()=>{const chamadaStorage = localStorage.getItem(chamada)
@@ -14,16 +21,17 @@ function App(){
   
   }, [] );
 
-  function handleAdd(){
+  const handleAdd = useCallback(()=>{
     setChamada([...chamada, input])
     setInput('')
-  }
+  });
 
   return (
-    <>
+    <body>
     <div className='main'>
       <ul>
-        <h1>Alunos da blue, turma 2:</h1>
+      <h1>{titulo}</h1>
+      <h3>A turma tem {totalAlunos} alunos.</h3>
         {chamada.map((aluno)=> (
           <li key={aluno}>{aluno}</li>
         ))}
@@ -33,7 +41,7 @@ function App(){
         <button type='button' onClick={handleAdd}>Cadastrar aluno</button>
       </div>
     </div>
-    </>
+    </body>
   )
 
 }

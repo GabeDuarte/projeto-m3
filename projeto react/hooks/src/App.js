@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo, useCallback} from 'react';
+import './App.css';
 
 function App(){
   // tarefas  -> nome do state
@@ -17,22 +18,30 @@ function App(){
   }
 }, []);
 
-  function handleAdd(){
+  const handleAdd = useCallback(()=>{
     setTarefas([...tarefas, input]);
-    setInput('')
-  }
+    setInput('');
+  }, [input, tarefas]);
+
+  const totalTarefas = useMemo(()=> tarefas.length, [tarefas]);
 
   return (
     <>
-    <ul>
-    <h2>{nome}</h2>
-      {tarefas.map((tarefa)=>(
-        <li key= {tarefa}>{tarefa}</li>
-      ))}
-    </ul>
-    <input placeholder='Insira novas tarefas' type='text' value={input} onChange={(e)=> setInput(e.target.value)}/>
-    <button type='button' onClick={handleAdd}>Adicionar</button>
+    <div classname='main'>
+      <ul>
+      <h2>{nome}</h2>
+        {tarefas.map((tarefa)=>(
+          <li key= {tarefa}>{tarefa}</li>
+        ))}
+      </ul>
+      <strong>Você tem: {totalTarefas} tarefas</strong>
+      <br></br>
+      <br></br>
+      <input placeholder='Insira novas tarefas' type='text' value={input} onChange={(e)=> setInput(e.target.value)}/>
+      <button type='button' onClick={handleAdd}>Adicionar</button>
+    </div>
     </>
+
   )
 }
 
